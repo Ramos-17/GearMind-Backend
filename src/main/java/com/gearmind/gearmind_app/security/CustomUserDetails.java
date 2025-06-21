@@ -20,7 +20,7 @@ public class CustomUserDetails implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         // This maps your Role enum (like ADMIN) to ROLE_ADMIN
         return Collections.singletonList(
-            new SimpleGrantedAuthority("ROLE_" + user.getRole().name())
+            new SimpleGrantedAuthority(user.getRole().name())
         );
     }
 
