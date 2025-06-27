@@ -16,6 +16,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/auth")
+@CrossOrigin(origins = {"http://localhost:5173", "https://gear-mind-frontend.vercel.app"})
 public class AuthController {
 
     @Autowired

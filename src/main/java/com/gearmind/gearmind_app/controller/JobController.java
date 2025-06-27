@@ -18,7 +18,7 @@ import org.springframework.http.ResponseEntity;
 
 @RestController
 @RequestMapping("/api/jobs")
-@CrossOrigin(origins = "http://localhost:5173") // Adjust port if needed
+@CrossOrigin(origins = {"http://localhost:5173", "https://gear-mind-frontend.vercel.app"})
 public class JobController {
 
     @Autowired
