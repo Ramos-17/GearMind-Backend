@@ -2,22 +2,28 @@
 FROM maven:3.9.6-eclipse-temurin-21 AS build
 WORKDIR /app
 
-# Copy only necessary files first for better layer caching
-COPY pom.xml .
+# Copy Maven wrapper files first
 COPY mvnw .
 COPY .mvn .mvn
 
-RUN chmod +x mvnw && ./mvnw dependency:go-offline
+# Make sure wrapper is executable
+RUN chmod +x mvnw
 
-# Now copy the rest of the source code
+# Copy pom.xml early to cache dependencies
+COPY pom.xml .
+
+# Go offline by resolving dependencies
+RUN ./mvnw dependency:go-offline
+
+# Copy rest of the source code
 COPY . .
 
+# Package app
 RUN ./mvnw -B -DskipTests clean package
 
 # ---------- Runtime stage ----------
 FROM eclipse-temurin:21-jre
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
-
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
