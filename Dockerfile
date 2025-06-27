@@ -6,7 +6,7 @@ RUN chmod +x mvnw
 RUN ./mvnw clean package -DskipTests
 
 # ---- Run Stage ----
-FROM eclipse-temurin:17-jdk
+FROM openjdk:17-jdk-slim
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
