@@ -1,5 +1,5 @@
-# Use a specific Maven version that's known to work well
-FROM maven:3.8.6-openjdk-21 AS build
+# Use a valid Maven image
+FROM maven:3.8.6-eclipse-temurin-21 AS build
 WORKDIR /app
 
 # Copy pom.xml first for better caching
@@ -13,7 +13,7 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # Runtime stage
-FROM openjdk:21-jre-slim
+FROM eclipse-temurin:21-jre
 WORKDIR /app
 
 # Copy the built jar
