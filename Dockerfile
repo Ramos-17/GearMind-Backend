@@ -1,12 +1,11 @@
-# ---- Build Stage ----
-FROM maven:3.8.7-openjdk-17-slim AS build
+# ---------- Build stage ----------
+FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /app
 COPY . .
-RUN chmod +x mvnw
-RUN ./mvnw clean package -DskipTests
+RUN ./mvnw -B -DskipTests clean package
 
-# ---- Run Stage ----
-FROM openjdk:17-jdk-slim
+# ---------- Runtime stage ----------
+FROM eclipse-temurin:17-jre
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
