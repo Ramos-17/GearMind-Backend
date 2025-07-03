@@ -49,10 +49,12 @@
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
 
+
+        <!-- Lombok for reducing boilerplate code -->
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>runtime</scope>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
         </dependency>
 
         <dependency>

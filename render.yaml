@@ -6,4 +6,4 @@ services:
     startCommand: java -jar target/gearmind-app-0.0.1-SNAPSHOT.jar
     envVars:
       - key: JAVA_VERSION
-        value: 21 
+        value: 17
